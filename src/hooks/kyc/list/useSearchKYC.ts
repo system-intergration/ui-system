@@ -1,4 +1,4 @@
-import { API } from "api";
+import API from "api";
 import { useQuery } from "react-query";
 import { SEARCH_KYC } from ".";
 import { config } from "../config";
@@ -14,7 +14,7 @@ export const searchKYCList = (
   params: searchKYCProps
 ): Promise<KYCListResponse> => {
   const { value, type } = params;
-  return API.get(config)(`/search?value=${value.trim()}&type=${type.trim()}`);
+  return API.get(config, `/search?value=${value.trim()}&type=${type.trim()}`);
 };
 
 export const useSearchKYC = (params: searchKYCProps) => {

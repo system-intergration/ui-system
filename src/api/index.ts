@@ -1,72 +1,45 @@
-import { AxiosResponse } from 'axios';
-import { JsonBody, makeRequest, RequestOptions } from './requestBuilder';
-
-export * from './types';
-export * from './config';
-export * from './requestBuilder';
-export type RequestBody = JsonBody | FormData;
-export type RequestMethod = (config: RequestOptions) => (url: string, body?: RequestBody) => Promise<AxiosResponse['data']>;
-
-export interface ApiWrapper {
-	get: RequestMethod;
-	post: RequestMethod;
-	patch: RequestMethod;
-	put: RequestMethod;
-	delete: RequestMethod;
+import { makeRequest } from "./api";
+import { RequestOptions, RequestPayload } from "./types";
+export * from "./types";
+export * from "./urls";
+export * from "./config";
+export * from "./api";
+class API {
+  async get<T>(
+    config: RequestOptions,
+    url: string,
+    payload?: RequestPayload
+  ): Promise<T> {
+    return makeRequest(config, url, { ...payload, method: "GET" });
+  }
+  async post<T>(
+    config: RequestOptions,
+    url: string,
+    payload?: RequestPayload
+  ): Promise<T> {
+    return makeRequest(config, url, { ...payload, method: "POST" });
+  }
+  async put<T>(
+    config: RequestOptions,
+    url: string,
+    payload?: RequestPayload
+  ): Promise<T> {
+    return makeRequest(config, url, { ...payload, method: "PUT" });
+  }
+  async delete<T>(
+    config: RequestOptions,
+    url: string,
+    payload?: RequestPayload
+  ): Promise<T> {
+    return makeRequest(config, url, { ...payload, method: "DELETE" });
+  }
+  async patch<T>(
+    config: RequestOptions,
+    url: string,
+    payload?: RequestPayload
+  ): Promise<T> {
+    return makeRequest(config, url, { ...payload, method: "PATCH" });
+  }
 }
 
-export const API: ApiWrapper = {
-	get: (config: RequestOptions) => async (url: string) =>
-		makeRequest(
-			{
-				method: 'get',
-				url,
-			},
-			config,
-		),
-
-	post: (config: RequestOptions) => async (url: string, body?: JsonBody) =>
-		makeRequest(
-			{
-				method: 'post',
-				body,
-				url,
-			},
-			config,
-		),
-
-	patch: (config: RequestOptions) => async (url: string, body?: JsonBody) =>
-		makeRequest(
-			{
-				method: 'patch',
-				body,
-				url,
-			},
-			config,
-		),
-
-	put: (config: RequestOptions) => async (url: string, body?: JsonBody) =>
-		makeRequest(
-			{
-				method: 'put',
-				body,
-				url,
-			},
-			config,
-		),
-
-	delete: (config: RequestOptions) => async (url: string) =>
-		makeRequest(
-			{
-				method: 'delete',
-				url,
-			},
-			config,
-		),
-};
-
-const conf: RequestOptions = {
-	apiVersion: 'barong',
-};
-
-export const changePassword = async (body: any) => API.post(conf)('/identity/users/password/confirm_code', body);
+export default new API();

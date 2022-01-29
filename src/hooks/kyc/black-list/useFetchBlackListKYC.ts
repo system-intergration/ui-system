@@ -1,4 +1,4 @@
-import { API } from "api";
+import API from "api";
 import { useQuery } from "react-query";
 import { FETCH_BLACK_LIST_KYC } from ".";
 import { config } from "../config";
@@ -13,7 +13,7 @@ export const fetchKYCBlackList = (
   params: getKYCProps
 ): Promise<KYCListResponse> => {
   const { page, size } = params;
-  return API.get(config)(`/black-list?page=${page - 1}&size=${size}`);
+  return API.get(config, `/black-list?page=${page - 1}&size=${size}`);
 };
 
 export const useFetchBlackListKYC = (params: getKYCProps) => {

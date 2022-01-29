@@ -1,4 +1,4 @@
-import { API } from "api";
+import API from "api";
 import { useQuery } from "react-query";
 import { FETCH_LIST_KYC } from ".";
 import { config } from "../config";
@@ -9,11 +9,10 @@ interface getKYCProps {
   size: number;
   status: StatusKYC | "search";
 }
-export const fetchKYCList = (params: getKYCProps): Promise<KYCListResponse> => {
-  const { page, size, status } = params;
-  return API.get(config)(
-    `/list?page=${page - 1}&size=${size}&status=${status}`
-  );
+export const fetchKYCList = (params: getKYCProps) => {
+  return API.get<KYCListResponse>(config, "/private/kyc", {
+    params,
+  });
 };
 
 export const useFetchListKYC = (params: getKYCProps) => {

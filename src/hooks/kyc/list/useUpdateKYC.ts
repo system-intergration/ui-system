@@ -1,4 +1,4 @@
-import { API } from "api";
+import API from "api";
 import { useMutation } from "react-query";
 import { config } from "../config";
 import { StatusKYC } from "../model";
@@ -10,7 +10,9 @@ interface BodyUpdateKYC {
   reason?: string;
 }
 export const updateKYC = (body: BodyUpdateKYC) => {
-  return API.put(config)("/status", body);
+  return API.put(config, "/status", {
+    body,
+  });
 };
 
 export const useUpdateKYC = () => {

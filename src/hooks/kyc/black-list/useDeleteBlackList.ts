@@ -1,4 +1,4 @@
-import { API } from "api";
+import API from "api";
 import { useMutation } from "react-query";
 import { config } from "../config";
 
@@ -9,7 +9,7 @@ export const deleteKYCBlackList = (
   params: DeleteProps
 ): Promise<{ message: string }> => {
   const { uid } = params;
-  return API.delete(config)(`/black-list?uid=${uid}`);
+  return API.delete(config, `/black-list/${uid}`);
 };
 
 export const useDeleteBlackList = () => {

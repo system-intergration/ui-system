@@ -1,12 +1,10 @@
 import { Menu } from "antd";
-import SubMenu from "antd/lib/menu/SubMenu";
-import { routes } from "constant";
-import { useNavigate } from "react-router-dom";
-
 import React, { useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { FcLandscape, FcMoneyTransfer } from "react-icons/fc";
+import { BsPersonPlus } from "react-icons/bs";
+import { NavLink, useNavigate } from "react-router-dom";
 import Style from "./style";
-import Logo from "images/logo.svg";
+
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (value: boolean) => void;
@@ -15,7 +13,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
   const trigger = useRef<HTMLButtonElement>(null);
   const sidebar = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  // close on click outside
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -74,50 +71,36 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           </button>
           {/* Logo */}
           <NavLink to="/dashboard" className="block pl-4">
-            <img
-              src={Logo}
-              alt="logo"
-              style={{
-                width: "11em",
-              }}
-            />
+            <div>Dashboard</div>
           </NavLink>
         </div>
 
         {/* Links */}
         <div>
           <Menu mode="inline" className="sidebar-menu">
-            {routes.map((route, index) => {
-              return (
-                <React.Fragment key={index}>
-                  <SubMenu
-                    key={index}
-                    title={route.title}
-                    icon={<route.icons />}
-                    className="p-0"
-                  >
-                    {route.items.map((item, index) => {
-                      return (
-                        <React.Fragment key={index}>
-                          <Menu.Item
-                            onClick={() =>
-                              navigate(item.path, {
-                                state: item.title,
-                              })
-                            }
-                            icon={<item.icons />}
-                            className="pt-1"
-                          >
-                            {item.title}
-                          </Menu.Item>
-                        </React.Fragment>
-                      );
-                    })}
-                  </SubMenu>
-                  <hr />
-                </React.Fragment>
-              );
-            })}
+            <Menu.Item
+              title="Earning"
+              icon={<FcMoneyTransfer />}
+              onClick={() => navigate("/admin/earning")}
+            >
+              Statistic Earning
+            </Menu.Item>
+
+            <Menu.Item
+              title="Earning"
+              icon={<FcLandscape />}
+              onClick={() => navigate("/admin/vacation")}
+            >
+              Statistic Vacation
+            </Menu.Item>
+
+            <Menu.Item
+              title="Earning"
+              icon={<BsPersonPlus />}
+              onClick={() => navigate("/admin/add-employee")}
+            >
+              Add A Employee
+            </Menu.Item>
           </Menu>
         </div>
       </div>

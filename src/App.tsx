@@ -6,13 +6,18 @@ import "antd/dist/antd.css";
 import "./css/style.scss";
 import "./css/template-styles/index.css";
 // or 'antd/dist/antd.less'
+import "react-toastify/dist/ReactToastify.css";
+
 import ManageAppViews from "views";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <Router>
+      <ToastContainer />
+
       <div className="app">
         <div className="flex h-screen overflow-hidden">
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />

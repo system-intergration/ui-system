@@ -1,45 +1,24 @@
-import { BsFilePersonFill, BsFillPencilFill } from "react-icons/bs";
-import { MdOutlinePersonOff } from "react-icons/md";
-import { GrAnnounce, GrArticle } from "react-icons/gr";
+import { IconType } from "react-icons";
+import { FcMoneyTransfer } from "react-icons/fc";
 export const PG_TITLE_PREFIX = "BITX Exchange";
-export const APP_BASE_URL = "dashboard";
+export const APP_BASE_URL = "admin";
 export const DEFAULT_KYC_STEPS = ["email", "profile", "document", "address"];
 export const ORDER_BOOK_DEFAULT_SIDE_LIMIT = 50;
 export const STORAGE_DEFAULT_LIMIT = 20;
 
-export const routes = [
+// Language: typescript
+
+interface IConstant {
+  path_prefix: string;
+  path?: string;
+  title: string;
+  icons: IconType;
+  items?: IConstant[];
+}
+export const routes: IConstant[] = [
   {
-    title: "KYC MANAGE",
+    title: "EARNINGS MANAGE",
     path_prefix: "kyc",
-    icons: BsFilePersonFill,
-    items: [
-      {
-        title: "KYC List",
-        path: `${APP_BASE_URL}/kyc/list`,
-        icons: BsFilePersonFill,
-      },
-      {
-        title: "KYC Black List",
-        path: `${APP_BASE_URL}/kyc/black-list`,
-        icons: MdOutlinePersonOff,
-      },
-    ],
-  },
-  {
-    title: "ANNOUNCEMENT MANAGE",
-    path_prefix: "announcement",
-    icons: GrAnnounce,
-    items: [
-      {
-        title: "Create Article",
-        path: `${APP_BASE_URL}/announcement/article/create`,
-        icons: BsFillPencilFill,
-      },
-      {
-        title: "Article List",
-        path: `${APP_BASE_URL}/announcement/article/list`,
-        icons: GrArticle,
-      },
-    ],
+    icons: FcMoneyTransfer,
   },
 ];
